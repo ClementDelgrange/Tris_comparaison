@@ -1,15 +1,18 @@
-# -*- coding: utf8 -*-
-
 """
-Comparaison des performances de divers algorithmes de tri écrit en Python
+Comparaison des performances de plusieurs algorithmes de tri écrit en Python :
+- tri par sélection
+- tri par sélection récursif
+- tri par insertion
+- tri fusion
+- tri bulle
+- tri rapide
 """
 
-import sys, os
-sys.path.append(os.getcwd())
-sys.setrecursionlimit(10005)
-
-from main.compteur import Compteur
+from compteur import Compteur
 from random import randint
+
+import sys
+sys.setrecursionlimit(10005)
 
 
 def tri_selection(t, n):
@@ -32,13 +35,6 @@ def tri_selection(t, n):
         # On suppose que le min est en premier
         min = t[i]
         imin = i
-        # j = i+1
-        # while j < n:
-        #     if t[j] < min:
-        #         # On met à jour le min
-        #         min = t[j]
-        #         imin = j
-        #     j += 1
         for j in range(i+1, n):
             if t[j] < min:
                 # On met à jour le min
@@ -49,7 +45,6 @@ def tri_selection(t, n):
             t[imin] = t[i]
             t[i] = min
     return t
-
 
 
 def tri_recursif(t, n):
@@ -86,7 +81,6 @@ def tri_recursif(t, n):
     return t
 
 
-
 def tri_insertion(t, n):
     """
     Tri par insertion
@@ -112,7 +106,6 @@ def tri_insertion(t, n):
             j -= 1
         t[j] = temp
     return t
-
 
 
 def tri_fusion(t, n):
@@ -146,11 +139,9 @@ def tri_fusion(t, n):
             p += 1
         return t
 
-
     if n < 2:
         # Moins de 2 éléments : pas besoin de trier
         return t
-
 
     # Cas général : on découpe le tableau en 2 partie que l'on trie
     p = n // 2
@@ -179,7 +170,6 @@ def tri_fusion(t, n):
     return t
 
 
-
 def tri_bulle(t, n):
     """
     Tri bulle
@@ -206,9 +196,6 @@ def tri_bulle(t, n):
                 t[j] = t[j+1]
                 t[j+1] = temp
     return t
-
-
-
 
 
 def tri_rapide(t, n):
@@ -244,14 +231,12 @@ def tri_rapide(t, n):
         tri_rapide(t, p+1, j-1)
         return t
 
-
     if n < 2:
         # Moins de 2 éléments : pas besoin de trier
         return t
 
     t = tri_rapide(t, 0, n)
     return t
-
 
 
 if __name__ == '__main__':
@@ -275,7 +260,3 @@ if __name__ == '__main__':
     with Compteur("Tri rapide"):
         t7 = tri_rapide(t, len(t))
         print(t7)
-
-
-    t = [2, 5, 1, 2, 3, 5]
-    print(tri_insertion(t, len(t)))

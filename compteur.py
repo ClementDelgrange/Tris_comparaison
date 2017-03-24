@@ -1,14 +1,16 @@
 import time
 
+
 class Compteur(object):
     def __init__(self, nom):
         self.nom = nom
+
     def __enter__(self):
         self.t_debut = time.time()
+
     def __exit__(self, exc_ty, exc_val, exc_tb):
         t_fin = time.time()
         print('{}: {}'.format(self.nom, t_fin - self.t_debut))
-
 
 
 if __name__ == "__main__":
